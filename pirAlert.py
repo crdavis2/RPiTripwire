@@ -16,16 +16,17 @@ clientID = "IMGUR_CLIENT_ID" # Client ID for Imgur
 im = pyimgur.Imgur(clientID)
 
 GPIO.setmode(GPIO.BOARD) #Set GPIO to pin numbering
-pir = 8 #Assign pin 8 to PIR
+pir1 = 8 #Assign pin 8 to PIR1
+pir2 = 10 #Assign pin 10 to PIR2
 
 GPIO.setup(pir, GPIO.IN) #Setup GPIO pin PIR as input
 print ("Sensor initializing . . .")
-time.sleep(30) # Give sensor time to startup
+time.sleep(5) # Give sensor time to startup
 print ("Active")
 print ("Press Ctrl+c to end program")
 
 while True:
-    if GPIO.input(pir) == True:
+    if (GPIO.input(pir1) == True) and (GPIO.input(pir2) == True):
       with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)
         #camera.start_preview()
